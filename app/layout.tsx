@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { UserProvider } from '@auth0/nextjs-auth0/client';
+import NavBar from "./components/NavBar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <UserProvider>
+        <body className={`mx-auto min-h-screen justify-center w-full ${inter.className}`}>
+          <NavBar/>
+          <div className="p-8">{children}</div> 
+        </body>
+      </UserProvider>
     </html>
   );
 }
